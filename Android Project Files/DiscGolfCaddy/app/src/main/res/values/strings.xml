@@ -4,5 +4,10 @@
     <string name="app_name">DiscGolfCaddy</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="new_game">New Game</string>
+    <string name="course_finder">Course Finder</string>
+    <string name="number_holes_text"># of Holes</string>
+    <string name="number_players_text"># of Players</string>
+    <string name="start">Start</string>
 
 </resources>

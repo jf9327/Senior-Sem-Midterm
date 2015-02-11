@@ -1,10 +1,14 @@
 package com.discgolfcaddy.discgolfcaddy;
 
+import android.content.Context;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-
+import android.view.View;
+import android.widget.ActionMenuView;
+import android.view.View;
+import android.widget.RelativeLayout;
 
 public class mainMenu extends ActionBarActivity {
 
@@ -33,7 +37,24 @@ public class mainMenu extends ActionBarActivity {
         if (id == R.id.action_settings) {
             return true;
         }
+        switch (id){
+            case R.id.new_game:
+                start_newgame();
+                return true;
 
+            case R.id.course_finder:
+                start_coursefinder();
+                return true;
+
+        }
         return super.onOptionsItemSelected(item);
+    }
+    public void start_newgame(){
+        // change visible attribute for the id main_menu relative layout to "gone"
+        // also change visible attribute for the other Relative layout id new_game_paramters to visible to get input on the number
+        // of users and the number of holes for as fresh game.
+    }
+    public void start_coursefinder(){
+        // start golf course activity.
     }
 }
