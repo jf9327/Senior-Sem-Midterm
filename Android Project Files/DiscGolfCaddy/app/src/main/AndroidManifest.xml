@@ -16,6 +16,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ScoreCard"
+            android:label="@string/title_activity_score_card"
+            android:parentActivityName=".mainMenu" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.discgolfcaddy.discgolfcaddy.mainMenu" />
+        </activity>
     </application>
 
 </manifest>
