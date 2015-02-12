@@ -1,4 +1,32 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:id="@+id/container"
     android:layout_width="match_parent" android:layout_height="match_parent"
-    tools:context="com.discgolfcaddy.discgolfcaddy.ScoreCard" tools:ignore="MergeRootFrame" />
+    tools:context="com.discgolfcaddy.discgolfcaddy.ScoreCard" tools:ignore="MergeRootFrame"
+    android:rowCount="6"
+    android:columnCount="6">
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtHole1"
+        android:text="Hole 1"
+        android:layout_row="0"
+        android:layout_column="0" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtHole2"
+        android:layout_row="1"
+        android:layout_column="0"
+        android:text="Hole 2" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtHole3"
+        android:layout_row="2"
+        android:layout_column="0"
+        android:text="Hole 3" />
+
+</GridLayout>
