@@ -9,5 +9,6 @@
     <string name="number_holes_text"># of Holes</string>
     <string name="number_players_text"># of Players</string>
     <string name="start">Start</string>
+    <string name="title_activity_score_card">ScoreCard</string>
 
 </resources>
