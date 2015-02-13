@@ -12,6 +12,7 @@ import android.widget.RelativeLayout;
 
 public class mainMenu extends ActionBarActivity {
 
+    private Menu gameMenu;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,6 +24,7 @@ public class mainMenu extends ActionBarActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main_menu, menu);
+        gameMenu = menu;
         return true;
     }
 
@@ -49,10 +51,17 @@ public class mainMenu extends ActionBarActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+    /*
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu){
+
+        return super.onPrepareOptionsMenu(menu);
+    }*/
     public void start_newgame(){
         // change visible attribute for the id main_menu relative layout to "gone"
         // also change visible attribute for the other Relative layout id new_game_paramters to visible to get input on the number
         // of users and the number of holes for as fresh game.
+        gameMenu.clear();
     }
     public void start_coursefinder(){
         // start golf course activity.
