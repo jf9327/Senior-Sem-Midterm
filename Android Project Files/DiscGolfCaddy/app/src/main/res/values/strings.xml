@@ -9,5 +9,6 @@
     <string name="number_holes_text"># of Holes</string>
     <string name="number_players_text"># of Players</string>
     <string name="start">Start</string>
+    <string name="ScoreCard">\@string/score_card</string>
 
 </resources>
