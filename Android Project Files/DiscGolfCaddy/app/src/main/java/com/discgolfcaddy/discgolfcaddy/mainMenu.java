@@ -1,6 +1,7 @@
 package com.discgolfcaddy.discgolfcaddy;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -8,11 +9,17 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ActionMenuView;
 import android.view.View;
+import android.widget.PopupMenu;
 import android.widget.RelativeLayout;
+import android.view.Menu;
+import android.view.View.OnClickListener;
+import android.widget.PopupMenu.OnMenuItemClickListener;
+import android.app.Activity;
 
-public class mainMenu extends ActionBarActivity {
+public class mainMenu extends Activity implements OnClickListener, OnMenuItemClickListener {
 
     private Menu gameMenu;
+    private PopupMenu newGameParameters;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,9 +68,21 @@ public class mainMenu extends ActionBarActivity {
         // change visible attribute for the id main_menu relative layout to "gone"
         // also change visible attribute for the other Relative layout id new_game_paramters to visible to get input on the number
         // of users and the number of holes for as fresh game.
-        gameMenu.clear();
+       // gameMenu.clear();
+
     }
     public void start_coursefinder(){
         // start golf course activity.
     }
+
+    @Override
+    public void onClick(View v) {
+        
+    }
+
+    @Override
+    public boolean onMenuItemClick(MenuItem item) {
+        return false;
+    }
 }
+
