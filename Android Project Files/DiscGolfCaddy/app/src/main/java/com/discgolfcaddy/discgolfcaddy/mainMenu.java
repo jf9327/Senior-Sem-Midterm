@@ -31,7 +31,9 @@ public class mainMenu extends Activity implements OnClickListener {
         setContentView(R.layout.activity_main_menu);
         findViewById(R.id.new_game).setOnClickListener(new OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
+                //v.getId();
                 start_newgame();
             }
         });
@@ -44,6 +46,8 @@ public class mainMenu extends Activity implements OnClickListener {
                 EditText holes = (EditText) findViewById(R.id.number_holes);
                 b.putInt("players", Integer.parseInt(text.getText().toString()));
                 b.putInt("holes", Integer.parseInt(holes.getText().toString()));
+                intent.putExtras(b);
+                startActivity(intent);
 
             }
         });
@@ -61,6 +65,10 @@ public class mainMenu extends Activity implements OnClickListener {
             super.onBackPressed();
         }
 
+    }
+    @Override
+    public void onPause(){
+        super.onPause();
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
