@@ -17,19 +17,22 @@ public class ScoreCard extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+       /*
         setContentView(R.layout.activity_score_card);
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.container, new PlaceholderFragment())
                     .commit();
-        }
+        }*/
     }
 
 
     @Override
         public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
+        /*
         getMenuInflater().inflate(R.menu.menu_score_card, menu);
+        return true;*/
         return true;
     }
 
@@ -55,12 +58,12 @@ public class ScoreCard extends ActionBarActivity {
 
         public PlaceholderFragment() {
         }
-
+/*
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_map, container, false);
             return rootView;
-        }
+        }*/
     }
 }
