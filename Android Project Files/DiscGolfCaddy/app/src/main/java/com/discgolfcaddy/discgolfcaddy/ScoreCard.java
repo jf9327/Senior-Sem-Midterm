@@ -16,6 +16,8 @@ import android.os.Build;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 
 
@@ -35,39 +37,23 @@ public class scoreCard extends Activity {
         Bundle extras = getIntent().getExtras();
         holeCount = extras.getInt("holes");
         playerCount = extras.getInt("players");
-        //playerCount = 4;
+        TableLayout scorecard = (TableLayout) findViewById(R.id.scorecard);
         //ScrollView score = (ScrollView) findViewById(R.id.scrollView);
-        RelativeLayout score = (RelativeLayout) findViewById(R.id.scorecard);
         TextView[] texts = new TextView[playerCount];
         EditText[] scores = new EditText[playerCount];
-        for (int c=0; c< playerCount; c++){
+        TableRow[] trows = new TableRow[playerCount];
+        for (int c=0; c < playerCount; c++){
+            trows[c] = new TableRow(this);
             texts[c] = new TextView(this);
             scores[c] = new EditText(this);
             texts[c].setId(c);
             scores[c].setId(c * playerCount);
-            RelativeLayout.LayoutParams params1 = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-            RelativeLayout.LayoutParams params2 = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-            if (c > 0){
-                params1.addRule(RelativeLayout.BELOW, c-1);
-                params2.addRule(RelativeLayout.BELOW, ((c-1) * playerCount));
-                params2.addRule(RelativeLayout.RIGHT_OF, (c-1));
-                //texts[c].
-            }
-            texts[c].setLayoutParams(params1);
-           // params1.addRule(RelativeLayout.RIGHT_OF, texts[c].getId());
-            scores[c].setLayoutParams(params2);
-            texts[c].setText(Integer.toString((c+1)));
-            score.addView(texts[c]);
-            score.addView(scores[c]);
+            texts[c].setText("Player: " + Integer.toString((c+1)));
+            trows[c].addView(texts[c]);
+            trows[c].addView(scores[c]);
+            scorecard.addView(trows[c]);
         }
 
-       /*
-        setContentView(R.layout.activity_score_card);
-        if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.container, new PlaceholderFragment())
-                    .commit();
-        }*/
     }
 
 
