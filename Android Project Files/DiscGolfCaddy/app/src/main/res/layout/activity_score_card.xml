@@ -1,8 +1,22 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:id="@+id/container"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content" android:layout_height="wrap_content"
-    tools:context="com.discgolfcaddy.discgolfcaddy.ScoreCard" tools:ignore="MergeRootFrame"
+    tools:context="com.discgolfcaddy.discgolfcaddy.scoreCard" tools:ignore="MergeRootFrame"
     android:rowCount="5"
-    android:columnCount="9">
+    android:columnCount="9"
+    android:background="@drawable/discaddy_clearpage"
+    android:id="@+id/scorecard_layout"
+    >
 
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/scrollView"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true">
+        <RelativeLayout android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:columnCount="2"
+            android:id="@+id/scorecard">
+        </RelativeLayout>
+        </ScrollView>
 </RelativeLayout>

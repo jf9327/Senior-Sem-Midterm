@@ -40,11 +40,11 @@ public class mainMenu extends Activity implements OnClickListener {
         findViewById(R.id.start_button).setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mainMenu.this, ScoreCard.class);
+                Intent intent = new Intent(mainMenu.this, scoreCard.class);
                 Bundle b = new Bundle();
-                EditText text = (EditText) findViewById(R.id.number_players);
+                EditText players = (EditText) findViewById(R.id.number_players);
                 EditText holes = (EditText) findViewById(R.id.number_holes);
-                b.putInt("players", Integer.parseInt(text.getText().toString()));
+                b.putInt("players", Integer.parseInt(players.getText().toString()));
                 b.putInt("holes", Integer.parseInt(holes.getText().toString()));
                 intent.putExtras(b);
                 startActivity(intent);
