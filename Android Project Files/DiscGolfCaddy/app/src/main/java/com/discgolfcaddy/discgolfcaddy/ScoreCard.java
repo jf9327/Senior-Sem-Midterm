@@ -44,15 +44,18 @@ public class scoreCard extends Activity {
             texts[c] = new TextView(this);
             scores[c] = new EditText(this);
             texts[c].setId(c);
-            scores[c].setId(c);
-            RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+            scores[c].setId(c * playerCount);
+            RelativeLayout.LayoutParams params1 = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+            RelativeLayout.LayoutParams params2 = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
             if (c > 0){
-                params.addRule(RelativeLayout.BELOW, c-1);
+                params1.addRule(RelativeLayout.BELOW, c-1);
+                params2.addRule(RelativeLayout.BELOW, ((c-1) * playerCount));
+                params2.addRule(RelativeLayout.RIGHT_OF, (c-1));
                 //texts[c].
             }
-            texts[c].setLayoutParams(params);
-            params.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
-            scores[c].setLayoutParams(params);
+            texts[c].setLayoutParams(params1);
+           // params1.addRule(RelativeLayout.RIGHT_OF, texts[c].getId());
+            scores[c].setLayoutParams(params2);
             texts[c].setText(Integer.toString((c+1)));
             score.addView(texts[c]);
             score.addView(scores[c]);
