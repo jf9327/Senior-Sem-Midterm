@@ -5,6 +5,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.text.InputType;
 import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -33,12 +34,10 @@ public class scoreCard extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_score_card);
-        Intent intent = getIntent();
         Bundle extras = getIntent().getExtras();
         holeCount = extras.getInt("holes");
         playerCount = extras.getInt("players");
         TableLayout scorecard = (TableLayout) findViewById(R.id.scorecard);
-        //ScrollView score = (ScrollView) findViewById(R.id.scrollView);
         TextView[] texts = new TextView[playerCount];
         EditText[] scores = new EditText[playerCount];
         TableRow[] trows = new TableRow[playerCount];
@@ -48,6 +47,7 @@ public class scoreCard extends Activity {
             scores[c] = new EditText(this);
             texts[c].setId(c);
             scores[c].setId(c * playerCount);
+            scores[c].setInputType(InputType.TYPE_CLASS_NUMBER);
             texts[c].setText("Player: " + Integer.toString((c+1)));
             trows[c].addView(texts[c]);
             trows[c].addView(scores[c]);
@@ -55,7 +55,11 @@ public class scoreCard extends Activity {
         }
 
     }
-
+    @Override
+    public void onDestroy(){
+        // Add stuff for the shared preferences here.
+        super.onDestroy();
+    }
 
     @Override
         public boolean onCreateOptionsMenu(Menu menu) {
