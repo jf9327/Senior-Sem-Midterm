@@ -37,7 +37,7 @@ public class mainMenu extends Activity implements OnClickListener {
                 start_newgame();
             }
         });
-        findViewById(R.id.start_button).setOnClickListener(new OnClickListener() {
+                findViewById(R.id.start_button).setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(mainMenu.this, scoreCard.class);

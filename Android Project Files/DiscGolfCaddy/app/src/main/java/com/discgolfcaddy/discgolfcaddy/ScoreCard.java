@@ -14,6 +14,7 @@ import android.content.Intent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.os.Build;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
@@ -27,20 +28,30 @@ public class scoreCard extends Activity {
 
     private int holeCount = 0;
     private int playerCount = 0; // variables for player count and hole count.
-    private int[] scores;
+    private int holenumber = 0;
+    //      [hole][player]
+    private int[][] playerscores;
     //private ScrollView scorelayout;
-    private RelativeLayout[] players;
+    private Button next;
+    private Button back;
+    private TextView[] texts;
+    private EditText[] scores;
+    private TableRow[] trows;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_score_card);
         Bundle extras = getIntent().getExtras();
+        TextView holenum = (TextView) findViewById(R.id.hole_count);
+        holenum.append(Integer.toString(holenumber+1));
         holeCount = extras.getInt("holes");
         playerCount = extras.getInt("players");
+        playerscores = new int[holeCount][playerCount];
+        initPlayerArray();
         TableLayout scorecard = (TableLayout) findViewById(R.id.scorecard);
-        TextView[] texts = new TextView[playerCount];
-        EditText[] scores = new EditText[playerCount];
-        TableRow[] trows = new TableRow[playerCount];
+        texts = new TextView[playerCount];
+        scores = new EditText[playerCount];
+        trows = new TableRow[playerCount];
         for (int c=0; c < playerCount; c++){
             trows[c] = new TableRow(this);
             texts[c] = new TextView(this);
@@ -48,19 +59,60 @@ public class scoreCard extends Activity {
             texts[c].setId(c);
             scores[c].setId(c * playerCount);
             scores[c].setInputType(InputType.TYPE_CLASS_NUMBER);
+            scores[c].setText("0");
             texts[c].setText("Player: " + Integer.toString((c+1)));
             trows[c].addView(texts[c]);
             trows[c].addView(scores[c]);
             scorecard.addView(trows[c]);
         }
-
+        next = (Button) findViewById(R.id.button_next);
+        back = (Button) findViewById(R.id.button_back);
+        next.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (holenumber == holeCount){
+                    // start final score activity.
+                } else {
+                    for (int x = 0; x < playerCount; x++) {
+                        playerscores[holenumber][x] = Integer.parseInt(scores[x].getText().toString());
+                        scores[x].setText(Integer.toString(playerscores[holenumber][x]));
+                    }
+                    TextView holenum = (TextView) findViewById(R.id.hole_count);
+                    holenumber++;
+                    holenum.setText("Hole: " + Integer.toString(holenumber + 1));
+                }
+               // holenum.append(Integer.toString(holenumber+1));
+            }
+        });
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (holenumber > 0){
+                    holenumber--;
+                    for (int y =0; y < playerCount; y++){
+                       scores[y].setText(Integer.toString(playerscores[holenumber][y]));
+                        //scores[y].getText();
+                    }
+                    TextView holenum = (TextView) findViewById(R.id.hole_count);
+                    holenum.setText("Hole: " + Integer.toString(holenumber + 1));
+                    //holenumber++;
+                }
+                // else do nothing.
+            }
+        });
     }
     @Override
     public void onDestroy(){
         // Add stuff for the shared preferences here.
         super.onDestroy();
     }
-
+    public void initPlayerArray(){
+        for (int a =0; a < holeCount; a++){
+            for (int b =0; b < playerCount; b++){
+                playerscores[a][b] = 0;
+            }
+        }
+    }
     @Override
         public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
