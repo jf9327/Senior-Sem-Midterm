@@ -34,7 +34,7 @@ public class scoreCard extends Activity {
     //private ScrollView scorelayout;
     private Button next;
     private Button back;
-    private TextView[] texts;
+    private TextView[] texts, player_scores;
     private EditText[] scores;
     private TableRow[] trows;
     @Override
@@ -49,12 +49,14 @@ public class scoreCard extends Activity {
         playerscores = new int[holeCount][playerCount];
         initPlayerArray();
         final TableLayout scorecard = (TableLayout) findViewById(R.id.scorecard);
-        texts = new TextView[playerCount];
+        texts  = new TextView[playerCount];
+        player_scores = new TextView[playerCount];
         scores = new EditText[playerCount];
         trows = new TableRow[playerCount];
         for (int c=0; c < playerCount; c++){
             trows[c] = new TableRow(this);
             texts[c] = new TextView(this);
+            player_scores[c] = new TextView(this); // sets up for the final scores. allocation cannot be done in teh onclick callback buttons.
             scores[c] = new EditText(this);
             texts[c].setId(c);
             scores[c].setId(c * playerCount);
@@ -70,12 +72,17 @@ public class scoreCard extends Activity {
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                for (int a=0; a < playerCount; a++){
+                    playerscores[holenumber][a] = Integer.parseInt(scores[a].getText().toString());
+                }
                 holenumber++;
                 if (holenumber == holeCount){
                 ScrollView scrollscores = (ScrollView) findViewById(R.id.scrollView);
-                scrollscores.setVisibility(View.INVISIBLE);
-                ScrollView results = (ScrollView) findViewById(R.id.score_results);
-                results.setVisibility(View.VISIBLE);
+                RelativeLayout scoreresults = (RelativeLayout) findViewById(R.id.score_results_layout);
+                //scrollscores.setVisibility(View.INVISIBLE);
+                //scoreresults.setVisibility(View.VISIBLE);
+                //ScrollView results = (ScrollView) findViewById(R.id.score_results);
+                //results.setVisibility(View.VISIBLE);
                int[] totalplayerscores = new int[playerCount];
                for (int a=0; a < playerCount; a++){
                     for (int b=0; b < holeCount; b++){
@@ -85,15 +92,22 @@ public class scoreCard extends Activity {
                //TextView[] scoremess = new TextView[playerCount];
                for (int x=0; x < playerCount; x++){
                     //scoremess[x] = new TextView(this);
-                    texts[x].setText("Player " + (x+1) + ": " + totalplayerscores);
-                    scrollscores.addView(texts[x]);
+                   //totalplayerscores[x] += playerscores[holenumber-2][x]; // Get the last holes scores and add them.
+                   scores[x].setText("Final Score " + ": " + totalplayerscores[x]);
+                   scores[x].setInputType(InputType.TYPE_NULL);
+                   //player_scores[x].setText("Player " + (x+1) + ": " + totalplayerscores[x]);
+                   // scoreresults.addView(player_scores[x]);
+                    //scrollscores.addView(texts[x]);
                }
+                    TextView holenum = (TextView) findViewById(R.id.hole_count);
+
+                    holenum.setText("Final Scores ");
+                // results.addView(scoreresults);
 
 
                 } else {
 
                     for (int x = 0; x < playerCount; x++) {
-                        playerscores[holenumber -1][x] = Integer.parseInt(scores[x].getText().toString());
                         scores[x].setText(Integer.toString(playerscores[holenumber][x]));
                     }
                     TextView holenum = (TextView) findViewById(R.id.hole_count);
