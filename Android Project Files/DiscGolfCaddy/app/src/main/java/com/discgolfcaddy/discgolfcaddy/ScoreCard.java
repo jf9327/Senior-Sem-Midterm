@@ -48,7 +48,7 @@ public class scoreCard extends Activity {
         playerCount = extras.getInt("players");
         playerscores = new int[holeCount][playerCount];
         initPlayerArray();
-        TableLayout scorecard = (TableLayout) findViewById(R.id.scorecard);
+        final TableLayout scorecard = (TableLayout) findViewById(R.id.scorecard);
         texts = new TextView[playerCount];
         scores = new EditText[playerCount];
         trows = new TableRow[playerCount];
@@ -59,7 +59,7 @@ public class scoreCard extends Activity {
             texts[c].setId(c);
             scores[c].setId(c * playerCount);
             scores[c].setInputType(InputType.TYPE_CLASS_NUMBER);
-            scores[c].setText("0");
+            scores[c].setText(Integer.toString(playerscores[holenumber][c]));
             texts[c].setText("Player: " + Integer.toString((c+1)));
             trows[c].addView(texts[c]);
             trows[c].addView(scores[c]);
@@ -70,15 +70,34 @@ public class scoreCard extends Activity {
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                holenumber++;
                 if (holenumber == holeCount){
-                    // start final score activity.
+                ScrollView scrollscores = (ScrollView) findViewById(R.id.scrollView);
+                scrollscores.setVisibility(View.INVISIBLE);
+                ScrollView results = (ScrollView) findViewById(R.id.score_results);
+                results.setVisibility(View.VISIBLE);
+               int[] totalplayerscores = new int[playerCount];
+               for (int a=0; a < playerCount; a++){
+                    for (int b=0; b < holeCount; b++){
+                        totalplayerscores[a] += playerscores[b][a];
+                    }
+               }
+               //TextView[] scoremess = new TextView[playerCount];
+               for (int x=0; x < playerCount; x++){
+                    //scoremess[x] = new TextView(this);
+                    texts[x].setText("Player " + (x+1) + ": " + totalplayerscores);
+                    scrollscores.addView(texts[x]);
+               }
+
+
                 } else {
+
                     for (int x = 0; x < playerCount; x++) {
-                        playerscores[holenumber][x] = Integer.parseInt(scores[x].getText().toString());
+                        playerscores[holenumber -1][x] = Integer.parseInt(scores[x].getText().toString());
                         scores[x].setText(Integer.toString(playerscores[holenumber][x]));
                     }
                     TextView holenum = (TextView) findViewById(R.id.hole_count);
-                    holenumber++;
+
                     holenum.setText("Hole: " + Integer.toString(holenumber + 1));
                 }
                // holenum.append(Integer.toString(holenumber+1));
@@ -87,7 +106,10 @@ public class scoreCard extends Activity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (holenumber > 0){
+                if (holenumber == holeCount){
+
+                }
+                else if (holenumber > 0){
                     holenumber--;
                     for (int y =0; y < playerCount; y++){
                        scores[y].setText(Integer.toString(playerscores[holenumber][y]));
